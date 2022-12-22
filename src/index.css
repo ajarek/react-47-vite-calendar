@@ -15,10 +15,10 @@ body{
 }
 .App{
   width: 320px;
-  height: 480px;
+  height: 440px;
   box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.9);
   background-color:#130a06 ;
   border-radius: 5px;
   color: #f0f8ff;
-  padding: 1rem;
+  padding:2rem 1rem;
 }
