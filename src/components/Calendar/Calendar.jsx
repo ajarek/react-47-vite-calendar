@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from '../Modal/Modal'
 import './Calendar.css'
 const Calendar = () => {
@@ -10,9 +10,12 @@ const Calendar = () => {
   const monthActual = date.getMonth() + 1
   const yearActual = date.getFullYear()
   function getFirstDayOfMonth(year, month) {
-    return new Date(year, month, 1);
+    return new Date(year, month, 0)
   }
-  const firstDayOfMonth =getFirstDayOfMonth(x,y).getDay()-1<=0?6:getFirstDayOfMonth(x,y).getDay()-1
+  const firstDayOfMonth =
+    getFirstDayOfMonth(x, y).getDay() - 1 <= 0
+      ? 6
+      : getFirstDayOfMonth(x, y).getDay()
 
   const arrData = new Array(firstDayOfMonth).fill('')
   const [daysInWeek, setDaysInWeek] = useState([
@@ -44,10 +47,10 @@ const Calendar = () => {
   getDayInArray()
 
   function showModal(e) {
-    setDataDay(e.target.dataset.day,)
-    setDataMonth(e.target.dataset.month,)
-    setDataYear(e.target.dataset.year,)
-    
+    setDataDay(e.target.dataset.day)
+    setDataMonth(e.target.dataset.month)
+    setDataYear(e.target.dataset.year)
+
     setOpenModal(!openModal)
   }
 
@@ -72,7 +75,14 @@ const Calendar = () => {
   }
   return (
     <>
-      {openModal ? <Modal setModal={setModal} valueModal={`${dataDay<10?'0'+dataDay:dataDay}-${dataMonth<10?'0'+dataMonth:dataMonth}-${dataYear}`} /> : null}
+      {openModal ? (
+        <Modal
+          setModal={setModal}
+          valueModal={`${dataDay < 10 ? '0' + dataDay : dataDay}-${
+            dataMonth < 10 ? '0' + dataMonth : dataMonth
+          }-${dataYear}`}
+        />
+      ) : null}
       <div className='calendar-header'>
         <div className='header-wrapper'>
           <button onClick={() => setY(y - 1)}>◁</button>
