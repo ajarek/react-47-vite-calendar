@@ -9,7 +9,10 @@ const Calendar = () => {
   const date = new Date(x, y, z)
   const monthActual = date.getMonth() + 1
   const yearActual = date.getFullYear()
-  const firstDayOfMonth = date.getDay() <= 0 ? 6 : date.getDay()
+  function getFirstDayOfMonth(year, month) {
+    return new Date(year, month, 1);
+  }
+  const firstDayOfMonth =getFirstDayOfMonth(x,y).getDay()-1<=0?6:getFirstDayOfMonth(x,y).getDay()-1
 
   const arrData = new Array(firstDayOfMonth).fill('')
   const [daysInWeek, setDaysInWeek] = useState([

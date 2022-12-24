@@ -1,12 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Modal.css'
 const Modal = ({ setModal, valueModal }) => {
-  const [events, setEvents] = useState([])
+  const [events, setEvents] = useState(JSON.parse(localStorage.getItem('events'))||[])
+ 
   const onSubmit = (e) => {
     e.preventDefault()
-    setEvents([...events, e.target[1].value])
+    const obj={date:e.target[0].value,info:e.target[1].value}
+    
+    setEvents([...events ,obj  ])
+    
     e.target[1].value = ''
   }
+  useEffect(() => {
+    localStorage.setItem('events', JSON.stringify(events));
+  }, [events]);
+ const found= Object.values(events).filter(el=>el.date===valueModal)
+ 
   return (
     <div className='modalBackground'>
       <div className='modalContainer'>
@@ -38,9 +47,11 @@ const Modal = ({ setModal, valueModal }) => {
           </div>
         </form>
         <div className='body'>
-          {events.map((ev, inx) => {
-            return <p key={inx}>{ev}</p>
+        
+          {found&&found.map((ev, inx) => {
+            return <p key={inx}>{ev.info}</p>
           })}
+          
         </div>
 
         <button
